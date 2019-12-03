@@ -1,0 +1,2 @@
+fr.wildcodeschool.ioc.doaimpl.ProductDaoImpl2
+fr.wildcodeschool.ioc.Metier.PorductMetiersImpl
