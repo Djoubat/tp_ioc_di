@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import fr.wildcodeschool.ioc.Metier.PorductMetiersImpl;
 import fr.wildcodeschool.ioc.dao.IProductDao;
-import fr.wildcodeschool.ioc.doaimpl.ProductDaoImpl;
 
 public class PresentationDependancyInjectionDynamiqueIntermediateVersion {
 
@@ -33,7 +32,7 @@ public class PresentationDependancyInjectionDynamiqueIntermediateVersion {
 			IProductDao dao = (IProductDao) cPDao.getDeclaredConstructor().newInstance();
 //			System.out.println(dao.findById(id));
 
-			produMetiers.setDao(new ProductDaoImpl());
+			produMetiers.setDao(dao);
 
 			if (produMetiers.isAvailable(id))
 				System.out.println("le produit dont le id = " + id + " est disponible");

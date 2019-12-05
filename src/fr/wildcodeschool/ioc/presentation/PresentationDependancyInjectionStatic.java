@@ -14,6 +14,7 @@ public class PresentationDependancyInjectionStatic {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez le id du porduit svp :");
 		id = sc.nextInt();
+		sc.close();
 		
 		// Injection d'un objet ProductDaoImpl pour pouvoir l'utiliser via le setter
 		// => Injection des dépendences

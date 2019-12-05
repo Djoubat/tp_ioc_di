@@ -38,8 +38,9 @@ public class PresentationDependancyInjectionDynamiqueFinaleVersion {
 
 			// Creation de l'objet pMetier de type PorductMetiersImpl dynamiquement
 			Class<?> cPMetier = Class.forName(metierClassName);
-			IProductMetier pMetier = (IProductMetier) cPMetier.getConstructor().newInstance();
-
+			IProductMetier pMetier = (IProductMetier) cPMetier.getDeclaredConstructor().newInstance();
+			
+			
 			// appeller la fonction setDao de la classe PorductMetiersImpl dynamiquement
 			Method m = cPMetier.getMethod("setDao", IProductDao.class);
 			m.invoke(pMetier, dao);
