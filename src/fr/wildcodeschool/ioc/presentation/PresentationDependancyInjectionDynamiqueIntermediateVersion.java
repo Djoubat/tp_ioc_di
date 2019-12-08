@@ -8,8 +8,10 @@ import fr.wildcodeschool.ioc.dao.IProductDao;
 
 public class PresentationDependancyInjectionDynamiqueIntermediateVersion {
 
+	static PorductMetiersImpl produMetiers = new PorductMetiersImpl(); // /!\ couplage fort !!
+
 	public static void main(String[] args) {
-		PorductMetiersImpl produMetiers = new PorductMetiersImpl();
+
 		int id;
 
 		Scanner sc = new Scanner(System.in);
@@ -17,17 +19,18 @@ public class PresentationDependancyInjectionDynamiqueIntermediateVersion {
 		id = sc.nextInt();
 		sc.close();
 
-		// Solution : Injection de dépendance avec la programmation dynamique
+		// Solution : Injection de dépendances avec la programmation dynamique
 
 		try {
 //			System.out.println(System.getProperty("user.dir"));
 			sc = new Scanner(new File(System.getProperty("user.dir") + "/config/config.txt"));
 			String daoClassName = sc.next();
-			String metierClassName = sc.next();
+			sc.close();
 
 //			System.out.println(daoClassName);
 //			System.out.println(metierClassName);
-
+			
+			// Injection de dépendances et couplage faible
 			Class<?> cPDao = Class.forName(daoClassName);
 			IProductDao dao = (IProductDao) cPDao.getDeclaredConstructor().newInstance();
 //			System.out.println(dao.findById(id));
@@ -35,9 +38,9 @@ public class PresentationDependancyInjectionDynamiqueIntermediateVersion {
 			produMetiers.setDao(dao);
 
 			if (produMetiers.isAvailable(id))
-				System.out.println("le produit dont le id = " + id + " est disponible");
+				System.out.println("le produit " + dao.findById(id) + " est disponible");
 			else {
-				System.out.println("le produit dont le id = " + id + " est indisponible");
+				System.out.println("le produit " + dao.findById(id) + " est indisponible");
 			}
 
 			System.out.println("Fin !!");

@@ -7,8 +7,11 @@ import fr.wildcodeschool.ioc.doaimpl.ProductDaoImpl;
 
 public class PresentationDependancyInjectionStatic {
 
+	static PorductMetiersImpl produMetiers = new PorductMetiersImpl(); // /!\ couplage fort !!
+	static ProductDaoImpl productDaoImpl = new ProductDaoImpl() ; // /!\ couplage fort !!
+	
 	public static void main(String[] args) {
-		PorductMetiersImpl produMetiers = new PorductMetiersImpl(); // /!\ couplage fort !!
+		
 		int id;
 		
 		Scanner sc = new Scanner(System.in);
@@ -18,12 +21,12 @@ public class PresentationDependancyInjectionStatic {
 		
 		// Injection d'un objet ProductDaoImpl pour pouvoir l'utiliser via le setter
 		// => Injection des dépendences
-		produMetiers.setDao(new ProductDaoImpl());
+		produMetiers.setDao(productDaoImpl);
 
 		if (produMetiers.isAvailable(id))
-			System.out.println("le produit dont le id = " + id + " est disponible");
+			System.out.println("le produit " + productDaoImpl.findById(id) + " est disponible");
 		else {
-			System.out.println("le produit dont le id = " + id + " est indisponible");
+			System.out.println("le produit " + productDaoImpl.findById(id) + " est indisponible");
 		}
 		
 		System.out.println("Fin !!");

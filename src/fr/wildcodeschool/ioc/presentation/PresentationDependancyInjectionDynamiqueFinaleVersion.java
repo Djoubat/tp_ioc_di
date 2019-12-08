@@ -12,6 +12,8 @@ import fr.wildcodeschool.ioc.dao.IProductDao;
 
 public class PresentationDependancyInjectionDynamiqueFinaleVersion {
 
+	static IProductMetier pMetier;
+
 	public static void main(String[] args) {
 		int id;
 
@@ -38,10 +40,10 @@ public class PresentationDependancyInjectionDynamiqueFinaleVersion {
 
 			// Creation de l'objet pMetier de type PorductMetiersImpl dynamiquement
 			Class<?> cPMetier = Class.forName(metierClassName);
-			IProductMetier pMetier = (IProductMetier) cPMetier.getDeclaredConstructor().newInstance();
-			
-			
+			pMetier = (IProductMetier) cPMetier.getDeclaredConstructor().newInstance();
+
 			// appeller la fonction setDao de la classe PorductMetiersImpl dynamiquement
+			// Injection de dépendances et couplage faible
 			Method m = cPMetier.getMethod("setDao", IProductDao.class);
 			m.invoke(pMetier, dao);
 
